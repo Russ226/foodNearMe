@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FoodNearMe</string>
     <string name="title_activity_food_choice">FoodChoice</string>
+    <string name="title_activity_near_by_locations">NearByLocationsActivity</string>
 </resources>

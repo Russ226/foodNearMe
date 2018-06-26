@@ -34,6 +34,8 @@ public class FoodChoice extends AppCompatActivity {
         cuisinesView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 
+
+
     }
 
     private ArrayList<Cuisine> createList(){

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.russ.foodnearme.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,8 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FoodChoice"
+            android:name="com.example.russ.foodnearme.activities.FoodChoice"
             android:label="@string/title_activity_food_choice"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.NearByLocationsActivity"
+            android:label="@string/title_activity_near_by_locations"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
