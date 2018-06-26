@@ -1,4 +1,4 @@
-package com.example.russ.foodnearme;
+package com.example.russ.foodnearme.cuisine;
 
 /**
  * Created by russ on 6/26/18.

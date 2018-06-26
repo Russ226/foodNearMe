@@ -1,15 +1,16 @@
-package com.example.russ.foodnearme;
+package com.example.russ.foodnearme.cuisine;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.example.russ.foodnearme.R;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,8 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
         holder.foodImg.setImageResource(cuisine.getImageSrc());
         holder.cuisineName.setText(cuisine.getName());
 
+
+
     }
 
 
@@ -61,6 +64,13 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
             super(itemView);
             cuisineName = itemView.findViewById(R.id.cuisine_name);
             foodImg = itemView.findViewById(R.id.food_img);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.out.println("you've clicked me");
+                }
+            });
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.russ.foodnearme;
+package com.example.russ.foodnearme.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.GridView;
+
+import com.example.russ.foodnearme.R;
+import com.example.russ.foodnearme.cuisine.Cuisine;
+import com.example.russ.foodnearme.cuisine.CuisineAdapter;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,8 @@ public class FoodChoice extends AppCompatActivity {
 
         cuisinesView.setAdapter(cuisineAdapter);
         cuisinesView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+
     }
 
     private ArrayList<Cuisine> createList(){
