@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineViewHolder> {
 
-    private ArrayList<String> cuisines;
+    private ArrayList<Cuisine> cuisines;
     private Context cuisineContext;
 
 
@@ -35,8 +36,11 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
 
     @Override
     public void onBindViewHolder(CuisineViewHolder holder, int position) {
-        final String cuisine = cuisines.get(position);
-        holder.cuisineName.setText(cuisine);
+        final Cuisine cuisine = cuisines.get(position);
+        holder.foodImg.setImageResource(cuisine.getImageSrc());
+        holder.cuisineName.setText(cuisine.getName());
+
+
     }
 
 
@@ -49,22 +53,23 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
     private void createList(){
         cuisines = new ArrayList<>();
 
-        cuisines.add("Burgers");
-        cuisines.add("Chinese");
-        cuisines.add("Korean");
-        cuisines.add("BBQ");
-        cuisines.add("Ramen");
-        cuisines.add("Sushi");
+        cuisines.add(new Cuisine("Burgers", R.drawable.burger));
+        cuisines.add(new Cuisine("Chinese", R.drawable.chinese));
+        cuisines.add(new Cuisine("Korean", R.drawable.korean));
+        cuisines.add(new Cuisine("BBQ", R.drawable.bbq));
+        cuisines.add(new Cuisine("Ramen", R.drawable.ramen));
+        cuisines.add(new Cuisine("Sushi", R.drawable.sushi));
 
     }
 
     class CuisineViewHolder extends RecyclerView.ViewHolder {
         TextView cuisineName;
-
+        ImageView foodImg;
 
         public CuisineViewHolder(View itemView) {
             super(itemView);
             cuisineName = (TextView) itemView.findViewById(R.id.cuisine_name);
+            foodImg = (ImageView) itemView.findViewById(R.id.food_img);
         }
     }
 }
