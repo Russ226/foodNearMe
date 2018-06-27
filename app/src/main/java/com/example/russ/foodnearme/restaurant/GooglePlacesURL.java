@@ -11,9 +11,9 @@ import retrofit2.http.Query;
 
 public interface GooglePlacesURL {
 
-    String BASE_RUL = "https://maps.googleapis.com";
+    String BASE_URL = "https://maps.googleapis.com";
 
-    @GET("/maps/api/place/radarsearch/json")
-    Call<ResponseBody> getRestaurants(@Query("location") String location, @Query("type") String type, @Query("keyword") String keyword, @Query("key") String key);
+    @GET("/maps/api/place/nearbysearch/json")
+    Call<PlacesResult> getRestaurants(@Query("location") String location,@Query("radius") String radius, @Query("type") String type, @Query("keyword") String keyword, @Query("key") String key);
 
 }
