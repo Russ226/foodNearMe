@@ -6,16 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.russ.foodnearme.activities.NearByLocationsActivity">
 
-    <TextView
-        android:id = "@+id/test_text"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        />
-
-    <Button
-        android:id = "@+id/test_button"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/restaurants_Recycler"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test"/>
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -8,4 +8,11 @@
     tools:context="com.example.russ.foodnearme.activities.NearByLocationsActivity"
     tools:showIn="@layout/activity_near_by_locations">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/restaurants_Recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
 </android.support.constraint.ConstraintLayout>

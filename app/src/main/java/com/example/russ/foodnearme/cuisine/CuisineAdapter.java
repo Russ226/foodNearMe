@@ -2,19 +2,30 @@ package com.example.russ.foodnearme.cuisine;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.example.russ.foodnearme.R;
 import com.example.russ.foodnearme.activities.NearByLocationsActivity;
+import com.example.russ.foodnearme.restaurant.GooglePlacesURL;
+import com.example.russ.foodnearme.restaurant.PlacesResult;
 
 import java.util.ArrayList;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by russ on 6/26/18.
@@ -72,35 +83,35 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
                 public void onClick(View view) {
                     Intent intent;
 
-                    switch ((String)cuisineName.getText()){
+                    switch ((String) cuisineName.getText()) {
                         case "Burgers":
                             intent = new Intent(view.getContext(), NearByLocationsActivity.class);
-                            intent.putExtra("cuisine","Burgers");
+                            intent.putExtra("cuisine", "Burgers");
                             view.getContext().startActivity(intent);
                             break;
                         case "Chinese":
                             intent = new Intent(view.getContext(), NearByLocationsActivity.class);
-                            intent.putExtra("cuisine","Chinese");
+                            intent.putExtra("cuisine", "Chinese");
                             view.getContext().startActivity(intent);
                             break;
                         case "Korean":
                             intent = new Intent(view.getContext(), NearByLocationsActivity.class);
-                            intent.putExtra("cuisine","Korean");
+                            intent.putExtra("cuisine", "Korean");
                             view.getContext().startActivity(intent);
                             break;
                         case "BBQ":
                             intent = new Intent(view.getContext(), NearByLocationsActivity.class);
-                            intent.putExtra("cuisine","BBQ");
+                            intent.putExtra("cuisine", "BBQ");
                             view.getContext().startActivity(intent);
                             break;
                         case "Ramen":
                             intent = new Intent(view.getContext(), NearByLocationsActivity.class);
-                            intent.putExtra("cuisine","Ramen");
+                            intent.putExtra("cuisine", "Ramen");
                             view.getContext().startActivity(intent);
                             break;
                         case "Sushi":
                             intent = new Intent(view.getContext(), NearByLocationsActivity.class);
-                            intent.putExtra("cuisine","Sushi");
+                            intent.putExtra("cuisine", "Sushi");
                             view.getContext().startActivity(intent);
                             break;
                     }
@@ -108,5 +119,7 @@ public class CuisineAdapter extends RecyclerView.Adapter<CuisineAdapter.CuisineV
                 }
             });
         }
+
     }
+
 }
