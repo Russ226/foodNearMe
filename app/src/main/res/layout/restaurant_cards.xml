@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
+    android:padding="16dp"
+    app:ignore="NamespaceTypo"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width = "0dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_weight="95">
+
+
+
+        <TextView
+            android:id="@+id/name_of_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor= "#060047" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor= "#060047" />
+
+        <TextView
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor= "#060047" />
+
+    </RelativeLayout>
+
+</android.support.constraint.LinearLayout>
