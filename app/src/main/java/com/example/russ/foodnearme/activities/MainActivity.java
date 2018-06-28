@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         settings.setOnTouchListener(new OnTouchListener(){
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Intent i = new Intent(getApplicationContext(), FoodChoice.class);
+                Intent i = new Intent(getApplicationContext(), Settings.class);
                 startActivity(i);
 
                 return false;
