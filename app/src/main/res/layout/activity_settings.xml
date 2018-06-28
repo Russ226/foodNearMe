@@ -15,12 +15,13 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            
+
             <RadioButton
                 android:id="@+id/checkbox_meters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onCheckboxClicked"
+                android:checked="true"
                 android:text="Meters" />
 
             <RadioButton
@@ -45,7 +46,8 @@
             android:id="@+id/radius_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:inputType="number"
+            android:text="16093"/>
 
     </LinearLayout>
 
