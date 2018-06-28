@@ -18,6 +18,7 @@ import com.example.russ.foodnearme.restaurant.GooglePlacesURL;
 import com.example.russ.foodnearme.restaurant.PlacesResult;
 import com.example.russ.foodnearme.restaurant.RestaurantAdapter;
 import com.example.russ.foodnearme.restaurant.Result;
+import com.example.russ.foodnearme.settings.UserSettings;
 
 import org.w3c.dom.Text;
 
@@ -35,6 +36,7 @@ import retrofit2.Retrofit;
 public class NearByLocationsActivity extends AppCompatActivity {
     private RecyclerView restaurantView;
     private RestaurantAdapter restaurantAdapter;
+    private Call<PlacesResult> getPlaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,10 @@ public class NearByLocationsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String cuisine = bundle.getString("cuisine");
+
+        UserSettings userSettings = new UserSettings(getApplicationContext());
+
+
 
         final Context context = this;
 
@@ -54,10 +60,14 @@ public class NearByLocationsActivity extends AppCompatActivity {
 
         final Retrofit retrofit = builder.build();
 
-
-
         final GooglePlacesURL requests = retrofit.create(GooglePlacesURL.class);
-        Call<PlacesResult> getPlaces = requests.getRestaurants("38.928486,-77.032961", "8000", "restaurant", "chinese", "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
+        if(userSettings.getUNIT() == "Meters"){
+            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(userSettings.getRADIUS()), "restaurant", "chinese", "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
+
+        }else{
+            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(Double.valueOf(userSettings.getRADIUS()) * 0.00062137), "restaurant", "chinese", "");
+
+        }
         getPlaces.enqueue(new Callback<PlacesResult>() {
             @Override
             public void onResponse(Call<PlacesResult> call, Response<PlacesResult> response) {

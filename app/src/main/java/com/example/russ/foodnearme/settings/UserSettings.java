@@ -20,11 +20,11 @@ public class UserSettings {
         editor = prefs.edit();
     }
 
-    public static int getRADIUS() {
+    public int getRADIUS() {
         return RADIUS;
     }
 
-    public static String getUNIT() {
+    public String getUNIT() {
         return UNIT;
     }
 
