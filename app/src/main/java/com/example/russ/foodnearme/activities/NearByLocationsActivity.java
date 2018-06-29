@@ -62,12 +62,13 @@ public class NearByLocationsActivity extends AppCompatActivity {
 
         final GooglePlacesURL requests = retrofit.create(GooglePlacesURL.class);
         if(userSettings.getUNIT() == "Meters"){
-            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(userSettings.getRADIUS()), "restaurant", "chinese", "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
+            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(userSettings.getRADIUS()), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
 
         }else{
-            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(Double.valueOf(userSettings.getRADIUS()) * 0.00062137), "restaurant", "chinese", "");
+            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(Double.valueOf(userSettings.getRADIUS()) * 1609.34), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
 
         }
+        
         getPlaces.enqueue(new Callback<PlacesResult>() {
             @Override
             public void onResponse(Call<PlacesResult> call, Response<PlacesResult> response) {
