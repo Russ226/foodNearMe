@@ -21,7 +21,7 @@ import com.example.russ.foodnearme.R;
 public class UserLocation implements LocationListener {
     double latitude, longitude;
 
-    protected void UserLocation(Context context) {
+    public UserLocation(Context context) {
 
 
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -38,14 +38,17 @@ public class UserLocation implements LocationListener {
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
+       latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
+       longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
     }
 
     @Override
     public void onLocationChanged(Location location) {
         // TODO Auto-generated method stub
 
-        latitude = (double) (location.getLatitude());
-        longitude = (double) (location.getLongitude());
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
 
 
     }
@@ -70,7 +73,15 @@ public class UserLocation implements LocationListener {
 
     @Override
     public String toString() {
-        return String.valueOf(latitude + ',' +longitude);
+        return String.valueOf(latitude + ',' + longitude);
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }
 

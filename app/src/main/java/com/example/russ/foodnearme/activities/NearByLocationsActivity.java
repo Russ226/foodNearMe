@@ -18,6 +18,7 @@ import com.example.russ.foodnearme.restaurant.GooglePlacesURL;
 import com.example.russ.foodnearme.restaurant.PlacesResult;
 import com.example.russ.foodnearme.restaurant.RestaurantAdapter;
 import com.example.russ.foodnearme.restaurant.Result;
+import com.example.russ.foodnearme.settings.UserLocation;
 import com.example.russ.foodnearme.settings.UserSettings;
 
 import org.w3c.dom.Text;
@@ -43,6 +44,8 @@ public class NearByLocationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_near_by_locations);
 
+        UserLocation userLocation = new UserLocation(getApplicationContext());
+        
         Bundle bundle = getIntent().getExtras();
         String cuisine = bundle.getString("cuisine");
 
@@ -62,13 +65,13 @@ public class NearByLocationsActivity extends AppCompatActivity {
 
         final GooglePlacesURL requests = retrofit.create(GooglePlacesURL.class);
         if(userSettings.getUNIT() == "Meters"){
-            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(userSettings.getRADIUS()), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
+            getPlaces = requests.getRestaurants(String.valueOf(userLocation.getLatitude()) + ',' + String.valueOf(userLocation.getLongitude()), String.valueOf(userSettings.getRADIUS()), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
 
         }else{
-            getPlaces = requests.getRestaurants("38.928486,-77.032961", String.valueOf(Double.valueOf(userSettings.getRADIUS()) * 1609.34), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
+            getPlaces = requests.getRestaurants(String.valueOf(userLocation.getLatitude()) + ',' + String.valueOf(userLocation.getLongitude()), String.valueOf(Double.valueOf(userSettings.getRADIUS()) * 1609.34), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
 
         }
-        
+
         getPlaces.enqueue(new Callback<PlacesResult>() {
             @Override
             public void onResponse(Call<PlacesResult> call, Response<PlacesResult> response) {
