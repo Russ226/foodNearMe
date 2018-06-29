@@ -45,7 +45,7 @@ public class NearByLocationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_near_by_locations);
 
         UserLocation userLocation = new UserLocation(getApplicationContext());
-        
+
         Bundle bundle = getIntent().getExtras();
         String cuisine = bundle.getString("cuisine");
 
