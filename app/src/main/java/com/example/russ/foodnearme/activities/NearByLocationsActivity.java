@@ -50,6 +50,7 @@ public class NearByLocationsActivity extends AppCompatActivity {
         String cuisine = bundle.getString("cuisine");
 
         UserSettings userSettings = new UserSettings(getApplicationContext());
+        System.out.println(userLocation.getLatitude() + ", " + userLocation.getLongitude());
 
         FloatingActionButton homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -72,17 +73,18 @@ public class NearByLocationsActivity extends AppCompatActivity {
         final Retrofit retrofit = builder.build();
 
         final GooglePlacesURL requests = retrofit.create(GooglePlacesURL.class);
-        if(userSettings.getUNIT() == "Meters"){
-            getPlaces = requests.getRestaurants(String.valueOf(userLocation.getLatitude()) + ',' + String.valueOf(userLocation.getLongitude()), String.valueOf(userSettings.getRADIUS()), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
+        if(userSettings.getUNIT() == "Kilometers"){
+            getPlaces = requests.getRestaurants(String.valueOf(userLocation.getLatitude()) + ',' + String.valueOf(userLocation.getLongitude()), String.valueOf(userSettings.getRADIUS() * 1000), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
 
         }else{
             getPlaces = requests.getRestaurants(String.valueOf(userLocation.getLatitude()) + ',' + String.valueOf(userLocation.getLongitude()), String.valueOf(Double.valueOf(userSettings.getRADIUS()) * 1609.34), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
 
         }
-
+        System.out.println(getPlaces.request().url());
         getPlaces.enqueue(new Callback<PlacesResult>() {
             @Override
             public void onResponse(Call<PlacesResult> call, Response<PlacesResult> response) {
+
                 restaurantView = findViewById(R.id.restaurants_Recycler);
                 restaurantAdapter =  new RestaurantAdapter((ArrayList<Result>) response.body().getResults(), context);
 

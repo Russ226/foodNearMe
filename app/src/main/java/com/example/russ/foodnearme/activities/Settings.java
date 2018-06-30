@@ -38,7 +38,7 @@ public class Settings extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 UserSettings userSettings = new UserSettings(getApplicationContext());
-                userSettings.setRADIUS(Integer.valueOf(edit.toString()));
+                userSettings.setRADIUS(Integer.parseInt(edit.toString()));
                 userSettings.setUNIT(unit);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);

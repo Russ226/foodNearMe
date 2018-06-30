@@ -8,8 +8,8 @@ import android.content.SharedPreferences;
  */
 
 public class UserSettings {
-    private final static int RADIUS = 1000;
-    private final static String UNIT = "Meters";
+    private final static int RADIUS = 2;
+    private final static String UNIT = "Kilometers";
     private static final String PREFERENCES_NAME = "Settings";
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
