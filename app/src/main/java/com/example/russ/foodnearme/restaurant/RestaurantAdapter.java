@@ -1,6 +1,8 @@
 package com.example.russ.foodnearme.restaurant;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,12 +61,24 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
         TextView isOpen;
 
+        TextView googleMaps;
 
         public RestaurantViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name_of_restaurant);
             address = itemView.findViewById(R.id.address);
             isOpen = itemView.findViewById(R.id.open);
+
+            googleMaps = itemView.findViewById(R.id.google_maps);
+            googleMaps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse("google.navigation:q=" + address.getText().toString()));
+                    restaurantContext.startActivity(intent);
+                }
+            });
         }
 
         public TextView getName() {
@@ -78,5 +92,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public TextView getIsOpen() {
             return isOpen;
         }
+
+
     }
 }

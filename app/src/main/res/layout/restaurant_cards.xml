@@ -41,6 +41,17 @@
             android:textSize="20sp"
             android:textColor= "#060047" />
 
+        <TextView
+            android:id = "@+id/google_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="#d83722"
+            android:text="Get Directions"
+            />
+
     </LinearLayout>
 
 
