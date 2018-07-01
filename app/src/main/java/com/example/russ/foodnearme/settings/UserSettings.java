@@ -21,11 +21,11 @@ public class UserSettings {
     }
 
     public int getRADIUS() {
-        return RADIUS;
+        return prefs.getInt(String.valueOf(RADIUS), 0);
     }
 
     public String getUNIT() {
-        return UNIT;
+        return prefs.getString(UNIT, "");
     }
 
     public void setRADIUS(int radius){

@@ -50,7 +50,6 @@ public class NearByLocationsActivity extends AppCompatActivity {
         String cuisine = bundle.getString("cuisine");
 
         UserSettings userSettings = new UserSettings(getApplicationContext());
-        System.out.println(userLocation.getLatitude() + ", " + userLocation.getLongitude());
 
         FloatingActionButton homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +79,7 @@ public class NearByLocationsActivity extends AppCompatActivity {
             getPlaces = requests.getRestaurants(String.valueOf(userLocation.getLatitude()) + ',' + String.valueOf(userLocation.getLongitude()), String.valueOf(Double.valueOf(userSettings.getRADIUS()) * 1609.34), "restaurant", cuisine, "AIzaSyB60oq2EJuUpDw31a1Bg4v5QanRsNX_fN4");
 
         }
-        System.out.println(getPlaces.request().url());
+        //System.out.println(getPlaces.request().url());
         getPlaces.enqueue(new Callback<PlacesResult>() {
             @Override
             public void onResponse(Call<PlacesResult> call, Response<PlacesResult> response) {

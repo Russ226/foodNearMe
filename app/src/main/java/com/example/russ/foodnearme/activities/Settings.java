@@ -21,8 +21,8 @@ import org.w3c.dom.Text;
 public class Settings extends AppCompatActivity{
     private TextView radius;
 
-//    CheckBox miles = (CheckBox)findViewById(R.id.checkbox_miles);
-//    CheckBox meters = (CheckBox)findViewById(R.id.checkbox_meters);
+//
+//
     String unit;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -31,14 +31,25 @@ public class Settings extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        final EditText edit = (EditText)findViewById(R.id.radius_input);
+        final UserSettings userSettings = new UserSettings(getApplicationContext());
 
+        final EditText edit = findViewById(R.id.radius_input);
+        edit.setText(String.valueOf(userSettings.getRADIUS()));
+
+        RadioButton kilometers = findViewById(R.id.checkbox_meters);
+        RadioButton miles = findViewById(R.id.checkbox_miles);
+
+        if(userSettings.getUNIT() == "Kilometers"){
+            kilometers.setChecked(true);
+        }else{
+            miles.setChecked(true);
+        }
         final Button save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserSettings userSettings = new UserSettings(getApplicationContext());
-                userSettings.setRADIUS(Integer.parseInt(edit.toString()));
+
+                userSettings.setRADIUS(Integer.valueOf(edit.getText().toString()));
                 userSettings.setUNIT(unit);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -67,7 +78,7 @@ public class Settings extends AppCompatActivity{
             case R.id.checkbox_meters:
                 RadioButton meters = findViewById(R.id.checkbox_meters);
                 if(meters.isChecked()){
-                    unit = "Meters";
+                    unit = "Kilometers";
                 }
 
                 break;
