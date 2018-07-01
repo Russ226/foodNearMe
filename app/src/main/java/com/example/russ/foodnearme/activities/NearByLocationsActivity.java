@@ -60,6 +60,16 @@ public class NearByLocationsActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FoodChoice.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         final Context context = this;
 
