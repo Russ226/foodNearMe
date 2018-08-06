@@ -1,5 +1,7 @@
 package com.example.russ.foodnearme.restaurant;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
  * Created by russ on 6/27/18.
  */
 
-public class Result {
+public class Result implements Comparable<Result> {
     @SerializedName("geometry")
     private Geometry geometries;
 
@@ -47,6 +49,8 @@ public class Result {
 
     @SerializedName("vicinity")
     private String vicinity;
+
+    private Double distance;
 
     public Result(Geometry geometries, String icon, String id, String name, OpenHours openHours, List<Photo> photos, String placeID, PlusCode plusCode, String rating, String reference, String scope, List<String> types, String vicinity) {
         this.geometries = geometries;
@@ -116,6 +120,14 @@ public class Result {
         return vicinity;
     }
 
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+
     @Override
     public String toString() {
         return "Result{" +
@@ -133,5 +145,11 @@ public class Result {
                 ", types=" + types +
                 ", vicinity='" + vicinity + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(@NonNull Result result) {
+        return this.distance.compareTo(result.getDistance());
     }
 }
