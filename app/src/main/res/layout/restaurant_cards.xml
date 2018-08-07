@@ -16,6 +16,15 @@
         android:layout_weight="95">
 
 
+        <TextView
+            android:id="@+id/distance"
+            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor= "#060047" />
+
 
         <TextView
             android:id="@+id/name_of_restaurant"

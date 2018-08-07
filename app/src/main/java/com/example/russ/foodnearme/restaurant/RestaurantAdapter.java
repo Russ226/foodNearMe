@@ -46,6 +46,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         }else{
             holder.isOpen.setText("Closed");
         }
+        if(result.getDistance() < 1){
+            holder.distance.setText("< 1.0");
+        }else{
+            holder.distance.setText(result.getDistance().toString());
+        }
+
 
     }
 
@@ -63,11 +69,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
         TextView googleMaps;
 
+        TextView distance;
+
         public RestaurantViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name_of_restaurant);
             address = itemView.findViewById(R.id.address);
             isOpen = itemView.findViewById(R.id.open);
+            distance = itemView.findViewById(R.id.distance);
 
             googleMaps = itemView.findViewById(R.id.google_maps);
             googleMaps.setOnClickListener(new View.OnClickListener() {

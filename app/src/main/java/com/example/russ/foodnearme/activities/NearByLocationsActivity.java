@@ -3,6 +3,7 @@ package com.example.russ.foodnearme.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,6 +36,8 @@ import retrofit2.GsonConverterFactory;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static java.lang.Math.floor;
+
 public class NearByLocationsActivity extends AppCompatActivity {
     private RecyclerView restaurantView;
     private RestaurantAdapter restaurantAdapter;
@@ -45,7 +48,7 @@ public class NearByLocationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_near_by_locations);
 
-        UserLocation userLocation = new UserLocation(getApplicationContext());
+        final UserLocation userLocation = new UserLocation(getApplicationContext());
 
         Bundle bundle = getIntent().getExtras();
         String cuisine = bundle.getString("cuisine");
@@ -94,9 +97,11 @@ public class NearByLocationsActivity extends AppCompatActivity {
         getPlaces.enqueue(new Callback<PlacesResult>() {
             @Override
             public void onResponse(Call<PlacesResult> call, Response<PlacesResult> response) {
+                ArrayList<Result> results = (ArrayList<Result>) response.body().getResults();
+                findDistance(results, userLocation.getLatitude(), userLocation.getLongitude());
 
                 restaurantView = findViewById(R.id.restaurants_Recycler);
-                restaurantAdapter =  new RestaurantAdapter((ArrayList<Result>) response.body().getResults(), context);
+                restaurantAdapter =  new RestaurantAdapter(results, context);
 
                 restaurantView.setAdapter(restaurantAdapter);
                 restaurantView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
@@ -108,6 +113,20 @@ public class NearByLocationsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void findDistance(ArrayList<Result> results, double userLat, double userLong){
+        for(Result loc: results){
+            Location locLocation = new Location("");
+            locLocation.setLatitude(loc.getGeometries().getLocation().getLat());
+            locLocation.setLongitude(loc.getGeometries().getLocation().getLng());
+
+            Location userLocation = new Location("");
+            userLocation.setLatitude(userLat);
+            userLocation.setLongitude(userLong);
+            loc.setDistance(floor(locLocation.distanceTo(userLocation) * 0.000621371));
+        }
+        System.out.println("finished");
     }
 
 }
