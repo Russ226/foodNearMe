@@ -101,7 +101,7 @@ public class NearByLocationsActivity extends AppCompatActivity {
                 ArrayList<Result> results = (ArrayList<Result>) response.body().getResults();
                 findDistance(results, userLocation.getLatitude(), userLocation.getLongitude(), userSettings.getUNIT());
                 Collections.sort(results);
-                
+
                 restaurantView = findViewById(R.id.restaurants_Recycler);
                 restaurantAdapter =  new RestaurantAdapter(results, context);
 
