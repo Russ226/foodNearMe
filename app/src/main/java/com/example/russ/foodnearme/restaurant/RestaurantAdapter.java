@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.russ.foodnearme.R;
 import com.example.russ.foodnearme.cuisine.CuisineAdapter;
+import com.example.russ.foodnearme.settings.UserSettings;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     @Override
     public void onBindViewHolder(RestaurantViewHolder holder, int position) {
         final Result result = places.get(position);
+        UserSettings userSettings = new UserSettings(restaurantContext);
 
         holder.name.setText(result.getName());
         holder.address.setText(result.getVicinity());
@@ -46,12 +48,19 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         }else{
             holder.isOpen.setText("Closed");
         }
-        if(result.getDistance() < 1){
-            holder.distance.setText("< 1.0");
+        if(userSettings.getUNIT() == "Kilometers") {
+            if (result.getDistance() < 1) {
+                holder.distance.setText("< 1.0 KM");
+            } else {
+                holder.distance.setText(result.getDistance().toString() + " KM");
+            }
         }else{
-            holder.distance.setText(result.getDistance().toString());
+            if (result.getDistance() < 1) {
+                holder.distance.setText("< 1.0 M");
+            } else {
+                holder.distance.setText(result.getDistance().toString() + " M");
+            }
         }
-
 
     }
 

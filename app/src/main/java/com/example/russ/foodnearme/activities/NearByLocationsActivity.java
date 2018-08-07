@@ -27,6 +27,7 @@ import org.w3c.dom.Text;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -53,7 +54,7 @@ public class NearByLocationsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String cuisine = bundle.getString("cuisine");
 
-        UserSettings userSettings = new UserSettings(getApplicationContext());
+        final UserSettings userSettings = new UserSettings(getApplicationContext());
 
         FloatingActionButton homeButton = findViewById(R.id.home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +99,9 @@ public class NearByLocationsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PlacesResult> call, Response<PlacesResult> response) {
                 ArrayList<Result> results = (ArrayList<Result>) response.body().getResults();
-                findDistance(results, userLocation.getLatitude(), userLocation.getLongitude());
-
+                findDistance(results, userLocation.getLatitude(), userLocation.getLongitude(), userSettings.getUNIT());
+                Collections.sort(results);
+                
                 restaurantView = findViewById(R.id.restaurants_Recycler);
                 restaurantAdapter =  new RestaurantAdapter(results, context);
 
@@ -115,7 +117,7 @@ public class NearByLocationsActivity extends AppCompatActivity {
 
     }
 
-    public void findDistance(ArrayList<Result> results, double userLat, double userLong){
+    public void findDistance(ArrayList<Result> results, double userLat, double userLong, String unit){
         for(Result loc: results){
             Location locLocation = new Location("");
             locLocation.setLatitude(loc.getGeometries().getLocation().getLat());
@@ -124,9 +126,13 @@ public class NearByLocationsActivity extends AppCompatActivity {
             Location userLocation = new Location("");
             userLocation.setLatitude(userLat);
             userLocation.setLongitude(userLong);
-            loc.setDistance(floor(locLocation.distanceTo(userLocation) * 0.000621371));
+            if(unit == "Kilometers"){
+                loc.setDistance(floor(locLocation.distanceTo(userLocation) / 1000 ));
+            }else{
+                loc.setDistance(floor(locLocation.distanceTo(userLocation) * 0.000621371));
+            }
+
         }
-        System.out.println("finished");
     }
 
 }
